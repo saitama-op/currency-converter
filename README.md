@@ -1,6 +1,6 @@
 # Currency Converter CLI Tool (Go)
 
-A command-line tool written in Go that converts one currency to another using live exchange rates from [exchangerate.host](https://exchangerate.host).
+A command-line tool written in Go that converts one currency to another using live exchange rates from [exchangerate.host](https://exchangerate.host). **Note:** As of now, exchangerate.host requires an API key (free plan available).
 
 ---
 
@@ -9,7 +9,7 @@ A command-line tool written in Go that converts one currency to another using li
 - Convert between any two currencies using real-time exchange rates.
 - Simple CLI flags for amount, source, and target currency.
 - Error handling for invalid inputs or API failures.
-- Lightweight and fast.
+- Supports API key input via CLI flag or environment variable.
 
 ---
 
@@ -26,9 +26,9 @@ cd currency-converter
 go mod init currency-converter
 ```
 
-3. Run the tool:
+3. Run the tool (requires API key):
 ```bash
-go run main.go --amount 100 --from USD --to INR
+go run main.go --amount 100 --from USD --to INR --apikey YOUR_KEY
 ```
 
 ---
@@ -37,7 +37,7 @@ go run main.go --amount 100 --from USD --to INR
 
 ### Convert 100 USD to INR:
 ```bash
-go run main.go --amount 100 --from USD --to INR
+go run main.go --amount 100 --from USD --to INR --apikey YOUR_KEY
 ```
 
 **Output:**
@@ -47,11 +47,12 @@ go run main.go --amount 100 --from USD --to INR
 
 ### CLI Flags
 
-| Flag       | Description                         | Default |
-|------------|-------------------------------------|---------|
-| `--amount` | Amount to convert                   | 1       |
-| `--from`   | Source currency code (e.g., USD)    | USD     |
-| `--to`     | Target currency code (e.g., INR)    | INR     |
+| Flag       | Description                              | Default |
+|------------|------------------------------------------|---------|
+| `--amount` | Amount to convert                        | 1       |
+| `--from`   | Source currency code (e.g., USD)         | USD     |
+| `--to`     | Target currency code (e.g., INR)         | INR     |
+| `--apikey` | API key for exchangerate.host (required) | none    |
 
 ---
 
@@ -69,6 +70,7 @@ go run main.go --amount 100 --from USD --to INR
 - Batch conversions (multiple currency pairs in one run).
 - Web interface using Go’s `net/http` or Gin.
 - Local caching to reduce API calls.
+- Optional fallback to other free APIs like [frankfurter.app](https://www.frankfurter.app).
 
 ---
 
